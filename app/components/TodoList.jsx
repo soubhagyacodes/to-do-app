@@ -162,6 +162,8 @@ function TodoList() {
 									<form onSubmit={(e) => {
 										e.preventDefault();
 										handleAdd(atitle, adesc)
+										setTitle("")
+										setDesc("")
 									}}>
 										<Label className="font-base ">Title</Label>
 										<Input type="text" id="" placeholder="Title" className="mt-2 mb-4" value={atitle} onChange={(e) => setTitle(e.target.value)} />
