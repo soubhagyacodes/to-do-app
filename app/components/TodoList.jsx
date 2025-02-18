@@ -5,12 +5,9 @@ import { useState } from 'react'
 import { Button } from '@/components/ui/button'
 import { Edit, Trash2, PlusIcon } from 'lucide-react'
 
-function handleClick() {
 
-}
 
-const Todo = ({ todo, i }) => {
-	console.log(i)
+const Todo = ({ todo, i, deletefunc, edit, add }) => {
 	return (
 		<div className='w-full flex border-black/20 border items-center justify-between py-3 px-10 rounded-lg'>
 			<div className="position">
@@ -23,8 +20,8 @@ const Todo = ({ todo, i }) => {
 			</div>
 
 			<div className='buttons flex gap-2'>
-				<Button size="icon"><Edit /></Button>
-				<Button variant="destructive" onClick={handleClick}> <Trash2 />Delete </Button>
+				<Button size="icon" onClick={() => edit()}><Edit /></Button>
+				<Button variant="destructive" onClick={() => deletefunc(todo.id)}> <Trash2 />Delete </Button>
 			</div>
 		</div>
 	)
@@ -38,14 +35,26 @@ function TodoList() {
 	  ]
 	  
 	)
+
+	function handleAdd() {
+
+	}
+	
+	function handleDelete(todoID) {
+		setTodos(todos.filter(todo => todo.id !== todoID))
+	}
+	
+	function handleEdit() {
+	
+	}
+
 	return (
 		<div>
 			{todos.length > 0 &&
 				(<>
 					<div className='mt-8 flex flex-col gap-3'>
 						{todos.map((todo, index) => {
-							console.log(index)
-							return <Todo key={todo.id} todo={todo} i={index} />
+							return <Todo key={todo.id} todo={todo} i={index} deletefunc={handleDelete} edit={handleEdit} add={handleAdd}/>
 						}
 						)}
 					</div>
